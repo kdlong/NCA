@@ -43,14 +43,14 @@ def compare_km_cumulatives(df: pd.DataFrame, split_var: str, lower_val: float, u
     kmfdown = KaplanMeierFitter()
 
     dfup = df[df[split_var] >= upper_val]
-    dfdown = df[df[split_var] <= lower_val]
+    dfdown = df[df[split_var] < lower_val]
 
     kmfup.fit(dfup["n_cycles_trying"], dfup["pregnant"])
     kmfdown.fit(dfdown["n_cycles_trying"], dfdown["pregnant"])
     fig = plt.figure()
     ax = fig.add_subplot()
     kmfup.plot_cumulative_density(label=f"Participants {split_var} >= {upper_val}", ax=ax)
-    fig = kmfdown.plot_cumulative_density(label=f"Participants {split_var} <= {lower_val}", ax=ax)
+    fig = kmfdown.plot_cumulative_density(label=f"Participants {split_var} < {lower_val}", ax=ax)
     ax.set_ylabel("Prob(conception) within $n_{cycles}$")
     ax.set_xlabel("$n_{cycles}$")
     return fig
