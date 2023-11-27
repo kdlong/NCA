@@ -34,7 +34,7 @@ def prep_data_for_analysis(df: pd.DataFrame) -> pd.DataFrame:
 
     # This makes no sense and could screw up the predictions. Perhaps dropping them is better,
     # but for the sake of the importance analysis, it's ok
-    df_ana.loc[(df_ana["intercourse_frequency"] == 0.) & df_ana["pregnant"], "intercourse_frequency"] = df["intercourse_frequency"].mean()
+    df.loc[(df["intercourse_frequency"] == 0.) & df["pregnant"], "intercourse_frequency"] = df["intercourse_frequency"].mean()
      
     return df
 
